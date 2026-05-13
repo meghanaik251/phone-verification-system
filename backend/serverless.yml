@@ -1,0 +1,70 @@
+service: phone-verification-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  timeout: 30
+  memorySize: 256
+  environment:
+    MONGO_URI: "mongodb+srv://meghanan_db_user:t2uMi0dnDWnHN6os@cluster0.o7hle5v.mongodb.net/otp_project?retryWrites=true&w=majority"
+    TWILIO_SID: "ACf34dd053d9bb1461c79bfd7a491bea09"
+    TWILIO_AUTH_TOKEN: "e2b4a622f236fb9ebe8180ead7960df3"
+    TWILIO_VERIFY_SERVICE_SID: "VA0082fe4d88943f954313a5349c950344"
+    JWT_SECRET: "meghana_backend_assignment_secret"
+    NODE_ENV: "production"
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /{proxy+}
+
+package:
+  patterns:
+    - "!node_modules/.bin"
+    - "!.git/**"
+
+
+# service: phone-verification-api
+
+# provider:
+#   name: aws
+#   runtime: nodejs18.x
+#   region: us-east-1
+#   timeout: 30
+#   memorySize: 256
+#   environment:
+#     MONGO_URI: ${env:MONGO_URI}
+#     TWILIO_SID: ${env:TWILIO_SID}
+#     TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
+#     TWILIO_VERIFY_SERVICE_SID: ${env:TWILIO_VERIFY_SERVICE_SID}
+#     JWT_SECRET: ${env:JWT_SECRET}
+#     NODE_ENV: ${env:NODE_ENV}
+
+# functions:
+#   api:
+#     handler: lambda.handler
+#     events:
+#       - http:
+#           path: /{proxy+}
+#           method: any
+#           cors:
+#             origin: '*'
+#             headers:
+#               - Content-Type
+#               - Authorization
+#               - X-Requested-With
+#             allowCredentials: false
+
+# plugins:
+#   - serverless-offline
+#   - serverless-dotenv-plugin
+
+# package:
+#   patterns:
+#     - "!node_modules/.bin"
+#     - "!.git/**"
+#     - "!.env*"
