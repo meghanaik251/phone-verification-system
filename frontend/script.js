@@ -17,7 +17,7 @@ function validateOTP(otp) {
 // Real-time phone input validation
 document.getElementById('phone').addEventListener('input', function (e) {
   let phone = e.target.value;
-  phone = phone.replace(/\D/g, ''); // Remove non-digits
+  phone = phone.replace(/\D/g, ''); 
   if (phone.length > 10) phone = phone.slice(0, 10);
   e.target.value = phone;
 
@@ -34,7 +34,7 @@ document.getElementById('phone').addEventListener('input', function (e) {
 // Real-time OTP input validation
 document.getElementById('otp').addEventListener('input', function (e) {
   let otp = e.target.value;
-  otp = otp.replace(/\D/g, ''); // Remove non-digits
+  otp = otp.replace(/\D/g, ''); 
   if (otp.length > 6) otp = otp.slice(0, 6);
   e.target.value = otp;
 
@@ -49,7 +49,6 @@ document.getElementById('otp').addEventListener('input', function (e) {
 });
 
 function startTimer(expiryTime) {
-  // Clear any existing timer
   if (timerInterval) {
     clearInterval(timerInterval);
   }
@@ -66,22 +65,18 @@ function startTimer(expiryTime) {
     const distance = expiryTime - now;
 
     if (distance <= 0) {
-      // Timer expired
       clearInterval(timerInterval);
       timerContainer.style.display = 'none';
       verifyBtn.disabled = true;
       showMessage('OTP has expired. Please request a new OTP.', 'error');
 
-      // Clear OTP input
       document.getElementById('otp').value = '';
     } else {
-      // Calculate minutes and seconds
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-      // Change timer color to red when less than 30 seconds
       if (distance < 30000) {
         timerElement.style.color = '#e74c3c';
         timerElement.style.fontWeight = 'bold';
@@ -95,7 +90,6 @@ function showMessage(message, type) {
   messageDiv.textContent = message;
   messageDiv.className = `message ${type}`;
 
-  // Auto-hide success/info messages after 5 seconds
   if (type !== 'error') {
     setTimeout(() => {
       if (messageDiv.textContent === message) {
@@ -111,10 +105,8 @@ async function sendOTP() {
   const sendBtn = document.getElementById('sendOtpBtn');
   const phoneError = document.getElementById('phoneError');
 
-  // Clear previous messages
   showMessage('', '');
 
-  // Validate phone number
   if (!phone) {
     phoneError.textContent = 'Please enter your phone number';
     document.getElementById('phone').classList.add('error');
@@ -127,10 +119,8 @@ async function sendOTP() {
     return;
   }
 
-  // Format phone number with +91
   const formattedPhone = '+91' + phone;
 
-  // Disable send button during request
   sendBtn.disabled = true;
   sendBtn.textContent = 'Sending...';
 
@@ -148,21 +138,17 @@ async function sendOTP() {
     if (response.ok) {
       showMessage(data.message, 'success');
 
-      // Start timer if expiry time is provided
       if (data.expiryTime) {
         otpExpiryTime = new Date(data.expiryTime).getTime();
         startTimer(otpExpiryTime);
       }
 
-      // Clear OTP input
       document.getElementById('otp').value = '';
       document.getElementById('otpError').textContent = '';
 
-      // Focus on OTP input
       document.getElementById('otp').focus();
     } else {
       showMessage(data.message || 'Failed to send OTP', 'error');
-      // Reset timer if there was an error
       document.getElementById('timerContainer').style.display = 'none';
       document.getElementById('verifyOtpBtn').disabled = true;
     }
@@ -170,7 +156,6 @@ async function sendOTP() {
     console.error('Send OTP Error:', err);
     showMessage('Network error. Please check your connection.', 'error');
   } finally {
-    // Re-enable send button after 2 seconds (cooldown)
     setTimeout(() => {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send OTP';
@@ -184,10 +169,8 @@ async function verifyOTP() {
   const verifyBtn = document.getElementById('verifyOtpBtn');
   const otpError = document.getElementById('otpError');
 
-  // Clear previous messages
   showMessage('', '');
 
-  // Validate phone number
   if (!phone) {
     showMessage('Please enter your phone number', 'error');
     return;
@@ -198,7 +181,6 @@ async function verifyOTP() {
     return;
   }
 
-  // Validate OTP
   if (!otp) {
     otpError.textContent = 'Please enter the OTP';
     document.getElementById('otp').classList.add('error');
@@ -211,10 +193,8 @@ async function verifyOTP() {
     return;
   }
 
-  // Format phone number with +91
   const formattedPhone = '+91' + phone;
 
-  // Disable verify button during verification
   verifyBtn.disabled = true;
   verifyBtn.textContent = 'Verifying...';
 
@@ -297,7 +277,6 @@ async function testProtectedRoutes() {
       console.error(' Protected route /me failed:', await meResponse.text());
     }
 
-    // Test 2: Validate token
     const validateResponse = await fetch(`${BASE_URL}/validate-token`, {
       method: "GET",
       headers: {

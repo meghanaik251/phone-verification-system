@@ -1,57 +1,3 @@
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const cors = require("cors");
-// const rateLimit = require("express-rate-limit");
-
-// require("dotenv").config();
-
-// const authRoutes = require("./routes/authRoutes");
-
-// const app = express();
-
-// const otpLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, 
-//   max: 5, 
-//   message: {
-//     message: "Too many OTP requests. Please try again after 15 minutes."
-//   },
-//   standardHeaders: true,
-//   legacyHeaders: false,
-// });
-
-// const verifyLimiter = rateLimit({
-//   windowMs: 30 * 60 * 1000, 
-//   max: 10, 
-//   message: {
-//     message: "Too many verification attempts. Please try again after 30 minutes."
-//   },
-//   standardHeaders: true,
-//   legacyHeaders: false,
-// });
-
-// app.use(cors());
-// app.use(express.json());
-
-// app.use("/api/auth/send-otp", otpLimiter);
-// app.use("/api/auth/verify-otp", verifyLimiter);
-// app.use("/api/auth", authRoutes);
-
-// mongoose.connect(process.env.MONGO_URI)
-// .then(() => console.log("MongoDB Connected"))
-// .catch(err => console.log(err));
-
-
-// if (require.main === module) {
-//   const PORT = process.env.PORT || 3000;
-//   app.listen(PORT, () => {
-//     console.log(` Server running on port ${PORT}`);
-//     console.log(` Local: http://localhost:${PORT}`);
-//   });
-// }
-
-// module.exports = app;
-
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -63,14 +9,8 @@ const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-// Trust proxy for rate limiter (required for API Gateway)
+// Trust proxy for rate limiter 
 app.set('trust proxy', true);
-
-// Polyfill for crypto in older Node.js versions
-if (typeof global.crypto === 'undefined') {
-  const crypto = require('crypto');
-  global.crypto = crypto;
-}
 
 const otpLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, 
@@ -139,7 +79,6 @@ app.get("/api/health", async (req, res) => {
 
 // Middleware to ensure database connection for API routes
 app.use(async (req, res, next) => {
-  // Skip health check
   if (req.path === '/api/health') {
     return next();
   }

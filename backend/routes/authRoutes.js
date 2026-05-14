@@ -15,6 +15,7 @@ router.post("/send-otp", sendOTP);
 router.post("/verify-otp", verifyOTP);
 
 router.get("/me", authMiddleware, getCurrentUser);
+
 router.get("/validate-token", authMiddleware, validateToken);
 
 module.exports = router;
