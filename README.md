@@ -24,7 +24,7 @@ A production-ready phone verification system built using Node.js, Express.js, Mo
 ## Tech Stack
 
 | Category | Technology |
-|----------|------------|
+|----------|-------------|
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas |
 | SMS Service | Twilio Verify API |
@@ -41,11 +41,13 @@ phone-verification-system/
 │
 ├── backend/
 │   ├── controllers/
+│   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── middleware/
 │   ├── lambda.js
 │   ├── server.js
+    ├── serverless.yml
+│   ├── package.json
 │   └── .env
 │
 ├── frontend/
@@ -54,6 +56,7 @@ phone-verification-system/
 │   ├── script.js
 │   └── config.js
 │
+├── .gitignore
 └── README.md
 ```
 
@@ -68,7 +71,9 @@ git clone https://github.com/meghanaik251/phone-verification-system.git
 cd phone-verification-system
 ```
 
-### Backend Setup
+---
+
+## Backend Setup
 
 ```bash
 cd backend
@@ -76,18 +81,11 @@ npm install
 node server.js
 ```
 
-### Frontend Setup
-
-The frontend consists of static files (HTML, CSS, JS) that require no build process.
-
- ```bash
-   cd frontend
-
 ---
 
 ## Environment Variables
 
-Create a `.env` file inside backend:
+Create a `.env` file inside the `backend` folder:
 
 ```env
 MONGO_URI=your_mongodb_connection_string
@@ -104,58 +102,26 @@ PORT=3000
 
 ---
 
+## Frontend Setup
 
-## API Endpoints
+The frontend consists of static files (HTML, CSS, and JavaScript) and does not require a build process.
 
-### Send OTP
-
-```http
-POST /api/auth/send-otp
+```bash
+cd frontend
 ```
 
-Request:
-
-```json
-{
-  "phone": "+919876543210"
-}
-```
-
----
-
-### Verify OTP
-
-```http
-POST /api/auth/verify-otp
-```
-
-Request:
-
-```json
-{
-  "phone": "+919876543210",
-  "otp": "123456"
-}
-```
-
----
-
-### Health Check
-
-```http
-GET /health
-```
+You can directly open `index.html` in the browser 
 
 ---
 
 ## Authentication Flow
 
 1. User enters phone number
-2. OTP sent via Twilio
+2. OTP is sent via Twilio Verify API
 3. User enters OTP
 4. Backend verifies OTP
-5. JWT token generated
-6. User authenticated
+5. JWT token is generated
+6. User is authenticated
 
 ---
 
@@ -167,29 +133,28 @@ GET /health
 - Lambda Layers
 
 ### Frontend
-- AWS S3 Static Hosting
+- AWS S3 Static Website Hosting
 
 ---
 
 ## Rate Limits
 
 | Endpoint | Limit |
-|----------|-------|
-| Send OTP | 5 requests / 15 min |
-| Verify OTP | 10 requests / 30 min |
+|----------|--------|
+| Send OTP | 5 requests / 15 minutes |
+| Verify OTP | 10 requests / 30 minutes |
 | OTP Expiry | 2 minutes |
 | Cooldown | 60 seconds |
 
 ---
 
-
 ## Common Errors
 
 | Error | Solution |
 |------|-----------|
-| MongoDB connection failed | Check Atlas whitelist |
+| MongoDB connection failed | Check MongoDB Atlas IP whitelist |
 | Twilio SMS issue | Verify Twilio credentials |
-| Lambda timeout | Increase timeout |
+| Lambda timeout | Increase Lambda timeout duration |
 
 ---
 
@@ -216,17 +181,20 @@ node_modules/
 .env
 .serverless/
 .aws/
-
 ```
 
 ---
 
 ## Live Demo
 
+### Frontend
 ```text
-Frontend: https://your-frontend-url.com](http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/](http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/
+http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/
+```
 
-Backend API:  https://5ledyf7vsb.execute-api.us-east-1.amazonaws.com/prod/api/auth
+### Backend API
+```text
+https://5ledyf7vsb.execute-api.us-east-1.amazonaws.com/prod/api/auth
 ```
 
 ---
@@ -234,12 +202,21 @@ Backend API:  https://5ledyf7vsb.execute-api.us-east-1.amazonaws.com/prod/api/au
 ## Author
 
 ### Meghana Naik
-- Full Stack Software Engineer
-- 
-GitHub: https://github.com/meghanaik251
 
-LinkedIn: https://www.linkedin.com/in/meghana-g-n-908556297/
+- Software Development Engineer
+- Frontend Developer
+- Aspiring Full-Stack Developer
+- UI/UX Enthusiast
 
+### GitHub
+```text
+https://github.com/meghanaik251
+```
+
+### LinkedIn
+```text
+https://www.linkedin.com/in/meghana-g-n-908556297/
+```
 
 ---
 
