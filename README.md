@@ -202,12 +202,8 @@ https://5ledyf7vsb.execute-api.us-east-1.amazonaws.com/prod/api/auth
 ## Author
 
 ### Meghana Naik
-
-- Software Development Engineer
-- Frontend Developer
-- Aspiring Full-Stack Developer
-- UI/UX Enthusiast
-
+- Full Stack Software Engineer
+  
 ### GitHub
 ```text
 https://github.com/meghanaik251
