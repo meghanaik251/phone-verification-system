@@ -3,7 +3,6 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20-green)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
 ![AWS](https://img.shields.io/badge/AWS-Lambda-orange)
-![License](https://img.shields.io/badge/License-MIT-blue)
 
 A production-ready phone verification system built using Node.js, Express.js, MongoDB, Twilio Verify API, JWT authentication, and AWS serverless deployment.
 
@@ -65,7 +64,7 @@ phone-verification-system/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/phone-verification-system.git
+git clone https://github.com/meghanaik251/phone-verification-system.git
 cd phone-verification-system
 ```
 
@@ -79,10 +78,10 @@ node server.js
 
 ### Frontend Setup
 
-```bash
-cd frontend
+The frontend consists of static files (HTML, CSS, JS) that require no build process.
 
-```
+ ```bash
+   cd frontend
 
 ---
 
@@ -91,40 +90,20 @@ cd frontend
 Create a `.env` file inside backend:
 
 ```env
-PORT=3000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
 TWILIO_SID=your_twilio_sid
 TWILIO_AUTH_TOKEN=your_twilio_auth_token
 TWILIO_VERIFY_SERVICE_SID=your_verify_service_sid
+
+JWT_SECRET=your_secret_key
+NODE_ENV=development
+PORT=3000
 ```
 
 > Never commit `.env` files to GitHub.
 
 ---
 
-## Run Project
-
-### Start Backend
-
-```bash
-npm start
-```
-
-### Start Frontend
-
-```bash
-.
-```
-
-### URLs
-
-```text
-Backend: http://localhost:3000
-Frontend: http://localhost:8000
-```
-
----
 
 ## API Endpoints
 
@@ -203,26 +182,6 @@ GET /health
 
 ---
 
-## Security Features
-
-- JWT authentication
-- OTP expiration
-- Input validation
-- Rate limiting
-- Environment variable protection
-- CORS enabled
-
----
-
-## Useful Commands
-
-```bash
-npm install
-npm start
-npm run dev
-```
-
----
 
 ## Common Errors
 
@@ -231,8 +190,6 @@ npm run dev
 | MongoDB connection failed | Check Atlas whitelist |
 | Twilio SMS issue | Verify Twilio credentials |
 | Lambda timeout | Increase timeout |
-| CORS issue | Enable API Gateway CORS |
-
 
 ---
 
@@ -267,8 +224,9 @@ node_modules/
 ## Live Demo
 
 ```text
-Frontend: https://your-frontend-url.com](http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/
-Backend API: 
+Frontend: https://your-frontend-url.com](http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/](http://phone-verification-frontend-app.s3-website-us-east-1.amazonaws.com/
+
+Backend API:  https://5ledyf7vsb.execute-api.us-east-1.amazonaws.com/prod/api/auth
 ```
 
 ---
@@ -276,18 +234,15 @@ Backend API:
 ## Author
 
 ### Meghana Naik
-- Software fullstack Engineer
-
+- Full Stack Software Engineer
+- 
 GitHub: https://github.com/meghanaik251
 
 LinkedIn: https://www.linkedin.com/in/meghana-g-n-908556297/
 
 
 ---
-## License
 
-MIT License
----
 ## Acknowledgments
 
 - Twilio Verify API
